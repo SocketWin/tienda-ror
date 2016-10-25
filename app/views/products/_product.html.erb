@@ -1,0 +1,7 @@
+<div class="col-xs-6 col-lg-4">
+  <%= image_tag(product.imagen, alt: product.titulo, class: "img-responsive") %>
+  <h2><%= product.titulo %></h2>
+  <%= link_to "Descripción", product_path(product) %>
+  $<span><%= product.precio %></span>
+  <%= button_tag "Agregar al Carrrito", data: { toggle: "modal", target: "#myModal" }, class: "btn btn-primary" %>
+</div>

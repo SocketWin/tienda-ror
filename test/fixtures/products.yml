@@ -1,0 +1,10 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+<% 50.times do |n| %>
+product_<%= n+1 %>:
+  id: <%= n+1 %>
+  titulo: Mac Boox Pro Air <%= n+1 %>
+  descripcion: Descripcion <%= n+1 %>
+  imagen: product.png
+  precio: <%= Random.rand(900..999.99) %>
+<% end %>

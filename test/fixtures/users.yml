@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  name: Ronald
+  login: super
+  password_digest: $2a$10$4LEA7r4YmNHtvlAvHhsYAeZmk/xeUVtMTYqwIvYY76EW5GUqDiP4.
+  direccion: Algo inteligente
+  edad: 24
+  cuenta_bancaria: 4523452345
+
+two:
+  id: 2
+  name: Karina
+  login: linda
+  password_digest: $2a$10$4LEA7r4YmNHtvlAvHhsYAeZmk/xeUVtMTYqwIvYY76EW5GUqDiP4.
+  direccion: Algo inteligente
+  edad: 24
+  cuenta_bancaria: 4523452345

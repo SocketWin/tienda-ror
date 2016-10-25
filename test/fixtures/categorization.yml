@@ -1,0 +1,7 @@
+<% 50.times do |id| %>
+  <% 5.times do |n| %>
+  categorization_<%= (id+1).to_s+(n+1).to_s %>:
+    product_id: <%= id+1 %>
+    category_id: <%= id+n+1 %>
+  <% end %>
+<% end %>

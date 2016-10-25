@@ -1,0 +1,21 @@
+<% provide(:title, 'Categoria '+@category.id.to_s) %>
+<div class="row">
+  <p id="notice"><%= notice %></p>
+  <h1 class="page-header">
+    <%= @category.titulo %>
+  </h1>
+  <p class="lead">
+    <%= @category.descripcion %>
+  </p>
+</div>
+<% if @products.any? %>
+  <div class="row">
+    <%= will_paginate @products %>
+  </div>
+  <div class="row">
+    <%= render @products %>
+  </div>
+  <div class="row">
+    <%= will_paginate @products %>
+  </div>
+<% end %>

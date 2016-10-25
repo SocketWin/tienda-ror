@@ -1,0 +1,22 @@
+<% provide(:title, 'Inicio') %>
+<div class="jumbotron">
+  <div class="container">
+    <h1>Bienvenido a La Tienda Virtual</h1>
+    <p>En esta Tienda Virtual puede comprar cualquier producto digital que podrías
+      imaginar solo basta con que busques lo que deseas y te mostraremos muchas
+      posibilidades de donde escojas la que mas te guste.
+    </p>
+  </div>
+</div>
+    <% if @categories.any? %>
+    <div class="row">
+      <h3>Categorias (<%= @categories.count %>)</h3>
+      <%= will_paginate @categories %>
+    </div>
+    <div class="row">
+      <%= render @categories %>
+    </div>
+    <div class="row">
+      <%= will_paginate @categories %>
+    </div>
+    <% end %>
