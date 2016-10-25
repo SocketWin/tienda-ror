@@ -7,26 +7,27 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= render 'layouts/header' %>
-  <div class="container">
-    <div class="row row-offcanvas row-offcanvas-right">
-      <div class="col-xs-12 col-sm-9">
-        <p class="pull-right visible-xs">
-          <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Menú Usuario</button>
-        </p>
-        <%= yield %>
-      </div>
-      <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
-        <%= image_tag("imagen_predefinida.png", alt: "usuario") %>
-        <%= link_to "Mi carrito", controller: :inicio, action: :my_car %>
-        <hr>
-        <%= form_tag('/buscar_producto') do %>
-        <div class="form-group">
-          <%= text_field_tag "titulo", nil, placeholder: "buscar producto", class: "form-control" %>
-        </div>
-        <% end %>
-      </div>
+<%= render 'layouts/header' %>
+<div class="container">
+  <div class="row row-offcanvas row-offcanvas-right">
+    <div class="col-xs-12 col-sm-9">
+      <p class="pull-right visible-xs">
+        <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Menú Usuario</button>
+      </p>
+      <%= yield %>
     </div>
-    <%= render 'layouts/footer' %>
-  </body>
-  </html>
+    <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+      <%= image_tag("imagen_predefinida.png", alt: "usuario") %>
+      <%= link_to "Mi carrito", my_car_path %>
+      <hr>
+      <%= form_tag(buscar_producto_path, method: :get) do %>
+          <div class="form-group">
+            <%= text_field_tag "titulo", nil, placeholder: "buscar producto", class: "form-control" %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+  <%= render 'layouts/footer' %>
+</div>
+</body>
+</html>

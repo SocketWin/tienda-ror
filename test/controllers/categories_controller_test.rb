@@ -34,6 +34,11 @@ class CategoriesControllerTest < ActionController::TestCase
       assert_select "img[alt=?]", product.titulo
       assert_select "a[href=?]", product_path(product)
       assert_select "span", product.precio.to_s
+      assert_select "input[name='product_id']"
+      assert_select "input[name='cantidad']"
+      assert_select "form[action='/actualizar_carrito']" do |f|
+        assert_select f, "button"
+      end
     end
     assert_select "div.pagination", 2
   end

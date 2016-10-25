@@ -3,6 +3,7 @@ require 'test_helper'
 class UsersControllerTest < ActionController::TestCase
   setup do
     @user = users(:one)
+    @product = products(:product_1)
   end
 
   test "should get index" do
@@ -48,4 +49,10 @@ class UsersControllerTest < ActionController::TestCase
 
     assert_redirected_to users_path
   end
+
+  test "Deberia actualizar carrito" do
+    post :actualizar_carrito, product_id: @product.id, cantidad: 1
+    assert_response :redirect
+  end
+
 end

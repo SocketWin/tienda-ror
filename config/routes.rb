@@ -7,7 +7,8 @@ Rails.application.routes.draw do
 
   get 'my_car' => 'inicio#my_car'
 
-  post 'buscar_producto' => "inicio#buscar_producto"
+  get 'buscar_producto' => "inicio#buscar_producto", as: "buscar_producto"
+  post "actualizar_carrito" => "users#actualizar_carrito"
 
   resources :lines
   resources :products

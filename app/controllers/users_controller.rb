@@ -51,6 +51,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def actualizar_carrito
+    p "User: "
+    print @user
+    @product = Product.find_by_id params[:product_id]
+    @cantidad = params[:cantidad]
+    p "Product: "
+    print @product
+    p "Cantidad: "
+    print @cantidad
+    redirect_to :back
+  rescue ActionController::RedirectBackError
+    redirect_to root_path
+  end
+
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
@@ -62,13 +76,13 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.require(:user).permit(:name, :login, :edad, :direccion, :cuenta_bancaria, :password, :password_confirmation)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_params
+    params.require(:user).permit(:name, :login, :edad, :direccion, :cuenta_bancaria, :password, :password_confirmation)
+  end
 end
