@@ -7,9 +7,12 @@ class InicioController < ApplicationController
   end
 
   def sign_in
-  end
-
-  def my_car
+    # @user = User.find_by_login(params[:login])
+    # if @user.password == params[:password]
+    #   give_token
+    # else
+    #   redirect_to root_path
+    # end
   end
 
   def buscar_producto

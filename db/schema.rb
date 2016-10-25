@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160928174142) do
+ActiveRecord::Schema.define(version: 20161025193019) do
 
   create_table "cars", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -71,6 +71,8 @@ ActiveRecord::Schema.define(version: 20160928174142) do
     t.integer  "edad",            limit: 4
     t.string   "cuenta_bancaria", limit: 255
   end
+
+  add_index "users", ["login"], name: "index_users_on_login", unique: true, using: :btree
 
   add_foreign_key "cars", "users"
   add_foreign_key "lines", "cars"

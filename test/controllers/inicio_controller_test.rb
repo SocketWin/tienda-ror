@@ -34,11 +34,6 @@ class InicioControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get my_car" do
-    get :my_car
-    assert_response :success
-  end
-
   test "should post buscar_producto" do
     post :buscar_producto, titulo: "mac"
     assert_response :success

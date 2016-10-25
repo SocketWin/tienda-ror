@@ -16,7 +16,7 @@ namespace :db do
     password_confirmation: "contraseña")
     99.times do |n|
       User.create!(name: Faker::Name.name+"-#{n}",
-      login: Faker::Internet.user_name,
+      login: Faker::Internet.user_name+"#{n}",
       direccion: Faker::Address.street_address(include_secondary = true),
       edad: Faker::Number.number(2),
       cuenta_bancaria: Faker::Finance.credit_card,

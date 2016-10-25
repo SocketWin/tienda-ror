@@ -45,4 +45,10 @@ class UserTest < ActiveSupport::TestCase
     refute user.valid?, "password y password_confirmation deben ser iguales"
   end
 
+  test "Comprobar la existencia de metodos auxiliares" do
+    user = User.new
+    assert_respond_to user, "quitar_linea"
+    assert_respond_to user, "agregar_producto"
+  end
+
 end

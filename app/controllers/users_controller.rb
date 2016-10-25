@@ -52,17 +52,21 @@ class UsersController < ApplicationController
   end
 
   def actualizar_carrito
-    p "User: "
-    print @user
+    # p "User: "
+    # print @user
     @product = Product.find_by_id params[:product_id]
     @cantidad = params[:cantidad]
-    p "Product: "
-    print @product
-    p "Cantidad: "
-    print @cantidad
+    # p "Product: "
+    # print @product
+    # p "Cantidad: "
+    # print @cantidad
+
     redirect_to :back
   rescue ActionController::RedirectBackError
     redirect_to root_path
+  end
+
+  def my_car
   end
 
   # DELETE /users/1

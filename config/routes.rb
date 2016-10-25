@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   get 'sign_in' => 'inicio#sign_in'
 
-  get 'my_car' => 'inicio#my_car'
+  get 'my_car' => 'users#my_car'
 
   get 'buscar_producto' => "inicio#buscar_producto", as: "buscar_producto"
   post "actualizar_carrito" => "users#actualizar_carrito"

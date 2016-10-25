@@ -55,4 +55,9 @@ class UsersControllerTest < ActionController::TestCase
     assert_response :redirect
   end
 
+  test "should get my_car" do
+    get :my_car
+    assert_response :success
+  end
+
 end
