@@ -52,18 +52,9 @@ class UsersController < ApplicationController
   end
 
   def actualizar_carrito
-    # p "User: "
-    # print @user
     @product = Product.find_by_id params[:product_id]
     @cantidad = params[:cantidad]
-    # p "Product: "
-    # print @product
-    # p "Cantidad: "
-    # print @cantidad
-
-    redirect_to :back
-  rescue ActionController::RedirectBackError
-    redirect_to root_path
+    render :js => "alert('Ha agregado al carrito de compras.')"
   end
 
   def my_car

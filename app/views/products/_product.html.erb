@@ -5,7 +5,7 @@
   $<span><%= product.precio %></span>
   <div class="row">
     <div class="col-lg-8">
-      <%= form_tag("/actualizar_carrito") do %>
+      <%= form_tag("/actualizar_carrito", remote: true) do %>
           <div class="input-group">
             <!--<input type="text" class="form-control" placeholder="Cantidad">-->
             <%= text_field_tag "cantidad", 1, class:"form-control", placeholder:"Cantidad", required: true %>

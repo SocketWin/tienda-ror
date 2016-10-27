@@ -52,7 +52,7 @@ class UsersControllerTest < ActionController::TestCase
 
   test "Deberia actualizar carrito" do
     post :actualizar_carrito, product_id: @product.id, cantidad: 1
-    assert_response :redirect
+    assert_response :success
   end
 
   test "should get my_car" do
