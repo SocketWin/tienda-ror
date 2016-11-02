@@ -9,13 +9,13 @@
   </p>
 </div>
 <% if @products.any? %>
-  <div class="row">
-    <%= will_paginate @products %>
-  </div>
-  <div class="row">
-    <%= render @products %>
-  </div>
-  <div class="row">
-    <%= will_paginate @products %>
-  </div>
+    <div class="row">
+      <%= will_paginate @products %>
+    </div>
+    <div class="row">
+      <%= render @products %>
+    </div>
+    <div class="row">
+      <%= will_paginate @products %>
+    </div>
 <% end %>

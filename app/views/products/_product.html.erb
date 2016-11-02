@@ -7,11 +7,9 @@
     <div class="col-lg-8">
       <%= form_tag("/actualizar_carrito", remote: true) do %>
           <div class="input-group">
-            <!--<input type="text" class="form-control" placeholder="Cantidad">-->
             <%= text_field_tag "cantidad", 1, class:"form-control", placeholder:"Cantidad", required: true %>
             <%= text_field_tag "product_id", product.id, type: "hidden" %>
             <span class="input-group-btn">
-        <!--<button class="btn btn-primary" type="button">Al carrito!</button>-->
               <%= button_tag "Al carrito!", class: "btn btn-primary" %>
             </span>
           </div>

@@ -28,9 +28,9 @@ class ProductsControllerTest < ActionController::TestCase
     get :show, id: @product
     assert_response :success
     assert_select "img[alt='producto']"
-    assert_select "p", @producto.descripcion
-    assert_select "h2", @producto.titulo
-    assert_select "p", @producto.precio
+    assert_select "p", @product.descripcion
+    assert_select "h2", @product.titulo
+    assert_select "p strong", "$"+@product.precio.to_s
     assert_select "form[action='/actualizar_carrito']"
     assert_select "input[name='cantidad']"
     assert_select "input[name='product_id']"
