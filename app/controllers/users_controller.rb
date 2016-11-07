@@ -67,7 +67,7 @@ class UsersController < ApplicationController
   end
 
   def my_car
-    @lines = User.find_by_id(1).car.lines.paginate(page:1, per_page: 10)
+    @lines = User.find_by_id(1).car.lines.paginate(page: params[:page], per_page: 10)
   end
 
   # DELETE /users/1

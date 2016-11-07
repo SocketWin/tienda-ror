@@ -3,8 +3,21 @@
 <div class="row">
   <%= will_paginate @lines %>
 </div>
-<div class="list-group">
-  <%= render @lines %>
+<div class="row">
+  <table class='table table-striped'>
+    <thead>
+    <tr>
+      <th>Imagen Producto</th>
+      <th>Descripción Producto</th>
+      <th>Cantidad</th>
+      <th>Precio</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%= render @lines %>
+    </tbody>
+  </table>
 </div>
 <div class="row">
   <%= will_paginate @lines %>

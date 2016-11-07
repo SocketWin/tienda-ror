@@ -1,16 +1,16 @@
-<div class="list-group-item">
-  <div class="col-md-2">
+<tr>
+  <td>
     <%= image_tag(line.product.imagen, alt: line.product.descripcion, size: "72") %>
-  </div>
-  <div class="col-md-4"><%= line.product.descripcion %></div>
-  <div class="col-md-2"><%= line.cantidad %></div>
-  <div class="col-md-2"><%= line.product.precio %></div>
-  <div class="col-md-2">
+  </td>
+  <td><%= line.product.descripcion %></td>
+  <td><%= line.cantidad %></td>
+  <td><%= line.product.precio %></td>
+  <td>
     <%= form_tag(quitar_linea_path(line.id), method: :post) do %>
         <%= button_tag type:"input", class:"btn btn-danger btn-mini" do %>
             <!--<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>-->
             Quitar
         <% end %>
     <% end %>
-  </div>
-</div>
+  </td>
+</tr>
