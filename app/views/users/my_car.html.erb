@@ -1,0 +1,11 @@
+<% provide(:title, 'Mi Carrito') %>
+<h1>Mi Carrito</h1>
+<div class="row">
+  <%= will_paginate @lines %>
+</div>
+<div class="list-group">
+  <%= render @lines %>
+</div>
+<div class="row">
+  <%= will_paginate @lines %>
+</div>

@@ -4,6 +4,7 @@ namespace :db do
     make_users
     make_categories
     make_products
+    make_car_and_lines
     # make_categorizations
   end
   def make_users
@@ -37,6 +38,14 @@ namespace :db do
         product.categories << Category.find_by_id(n+y+1)
       end
       product.save!
+    end
+  end
+
+  def make_car_and_lines
+    user = User.find_by_id(1)
+    Car.create!(user: user)
+    50.times do |n|
+      user.car.lines.create!(product_id: n+1, cantidad: Random.rand(1..10))
     end
   end
 

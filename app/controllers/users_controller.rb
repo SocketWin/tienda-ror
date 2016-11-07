@@ -37,8 +37,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
+        format.html { redirect_to root_path, notice: 'User was successfully created.' }
+        format.json { render :show, status: :created, location: root_path }
       else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -67,6 +67,7 @@ class UsersController < ApplicationController
   end
 
   def my_car
+    @lines = User.find_by_id(1).car.lines.paginate(page:1, per_page: 10)
   end
 
   # DELETE /users/1

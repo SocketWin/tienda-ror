@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'inicio#index'
 
-  get 'sign_up' => 'inicio#sign_up'
+  # get 'sign_up' => 'inicio#sign_up'
 
   get 'sign_in' => 'inicio#sign_in'
 
@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   get 'buscar_producto' => "inicio#buscar_producto", as: "buscar_producto"
   post "actualizar_carrito" => "users#actualizar_carrito"
+  post 'quitar_linea' => "users#quitar_linea", as: "quitar_linea"
 
   resources :lines
   resources :products

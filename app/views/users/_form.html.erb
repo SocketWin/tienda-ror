@@ -11,36 +11,36 @@
         </div>
     <% end %>
 
-    <div class="field">
+    <div class="form-group">
       <%= f.label :name %><br>
-      <%= f.text_field :name %>
+      <%= f.text_field :name, placeholder: "Ronald Espinoza", class: "form-control" %>
     </div>
-    <div class="field">
+    <div class="form-group">
       <%= f.label :login %><br>
-      <%= f.text_field :login %>
+      <%= f.text_field :login, class: "form-control", placeholder: "Nombre de Usuario" %>
     </div>
-    <div class="field">
+    <div class="form-group">
       <%= f.label :password %><br>
-      <%= f.text_field :password, type: "password" %>
+      <%= f.text_field :password, type: "password", placeholder: "Contraseña", class: "form-control password" %>
     </div>
-    <div class="field">
+    <div class="form-group">
       <%= f.label :password_confirmation %><br>
-      <%= f.text_field :password_confirmation, type: "password" %>
+      <%= f.text_field :password_confirmation, type: "password", placeholder: "Confirmación de Contraseña", class: "form-control password" %>
     </div>
-    <div class="field">
+    <div class="form-group">
       <%= f.label :direccion %><br>
-      <%= f.text_field :direccion %>
+      <%= f.text_field :direccion, class: "form-control", placeholder: "Dirección domiciliaria" %>
     </div>
-    <div class="field">
+    <div class="form-group">
       <%= f.label :cuenta_bancaria %><br>
-      <%= f.text_field :cuenta_bancaria %>
+      <%= f.text_field :cuenta_bancaria, class: "form-control", placeholder: "Número de Cuenta Bancaria" %>
     </div>
-    <div class="field">
+    <div class="form-group">
       <%= f.label :edad %><br>
-      <%= f.text_field :edad %>
+      <%= f.text_field :edad, class: "form-control", placeholder: "Edad" %>
     </div>
 
     <div class="actions">
-      <%= f.submit %>
+      <%= f.submit "Envíar", class:"btn btn-primary" %>
     </div>
 <% end %>

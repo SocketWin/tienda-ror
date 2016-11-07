@@ -10,7 +10,7 @@ class InicioControllerTest < ActionController::TestCase
     assert_select "h1","Bienvenido a La Tienda Virtual"
     assert_select "title", "La Tienda Virtual | Inicio"
     assert_select "a", "Registrarte"
-    assert_select "a[href=?]", "/sign_up"
+    assert_select "a[href=?]", new_user_path
     assert_select "a", "Iniciar Sesión"
     assert_select "a[href=?]", "/sign_in"
     @categories.paginate(page:1, per_page: 25).each do |category|
@@ -22,11 +22,6 @@ class InicioControllerTest < ActionController::TestCase
     assert_select "a[href='/my_car']", "Mi carrito"
     assert_select "img[alt='usuario']"
     assert_select "input[placeholder='buscar producto']"
-  end
-
-  test "should get sign_up" do
-    get :sign_up
-    assert_response :success
   end
 
   test "should get sign_in" do

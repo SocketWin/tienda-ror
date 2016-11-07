@@ -27,7 +27,7 @@
       <%= link_to "Tienda Virtual", root_path, class: "navbar-brand" %>
     </div>
     <div class="navbar-form navbar-right">
-      <%= link_to "Registrarte", {controller: :inicio, action: :sign_up}, {class: "btn btn-primary"} %>
+      <%= link_to "Registrarte", new_user_path, {class: "btn btn-primary"} %>
       <%= link_to "Iniciar Sesión", {controller: :inicio, action: :sign_in}, {class: "btn btn-success"} %>
     </div>
   </div>
