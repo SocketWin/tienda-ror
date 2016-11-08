@@ -8,8 +8,8 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should get index" do
     get :index
-    assert_response :success
-    assert_not_nil assigns(:users)
+    assert_response :found
+    # assert_not_nil assigns(:users)
   end
 
   test "should get new" do
@@ -33,7 +33,7 @@ class UsersControllerTest < ActionController::TestCase
       post :create, user: { login: "nicky", name: "Naulo", direccion: "por ahi", cuenta_bancaria: "2214342234",
                             edad: 15, password: "algo1992", password_confirmation: "algo1992" }
     end
-    assert_redirected_to user_path(assigns(:user))
+    assert_redirected_to root_path
   end
 
   test "should show user" do
@@ -42,11 +42,13 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
+    sign_in @user
     get :edit, id: @user
     assert_response :success
   end
 
   test "should update user" do
+    sign_in @user
     patch :update, id: @user, user: { login: "neutron", name: "Jimmy", direccion: "por ahi", cuenta_bancaria: "0000000",
                                       edad: 15, password: "algo1992", password_confirmation: "algo1992" }
     assert_redirected_to user_path(assigns(:user))
@@ -93,7 +95,32 @@ class UsersControllerTest < ActionController::TestCase
       # end
       assert_select "tr td", 50
     end
+  end
 
+  test "should not get edit without user" do
+    get :edit, id: @user
+    assert_redirected_to signin_path
+  end
+  test "should not update user without a user" do
+    patch :update, id: @user, user: { name: @user.name, password: @user.password, password_confirmation:
+        @user.password_confirmation, login: @user.login }
+    assert_redirected_to signin_path
+  end
+  test "should not get edit with a different user" do
+    sign_in User.last
+    get :edit, id: @user
+    assert_redirected_to root_path
+  end
+  test "should not update user with a different user" do
+    sign_in User.last
+    patch :update, id: @user, user: { name: @user.name, password: @user.password, password_confirmation:
+        @user.password_confirmation, login: @user.login }
+    assert_redirected_to root_path
+  end
+
+  test "should not get index" do
+    get :index
+    assert_redirected_to signin_path
   end
 
 end

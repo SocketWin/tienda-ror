@@ -8,6 +8,9 @@
 </head>
 <body>
 <%= render 'layouts/header' %>
+<% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
 <div class="container">
   <div class="row row-offcanvas row-offcanvas-right">
     <div class="col-xs-12 col-sm-9">

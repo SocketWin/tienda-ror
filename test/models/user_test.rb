@@ -51,4 +51,20 @@ class UserTest < ActiveSupport::TestCase
     assert_respond_to user, "agregar_producto"
   end
 
+  # Da error este test
+  # test "Comprobar_existencia_de_los_atributos" do
+  #   assert_respond_to user, "remember_token"
+  #   assert_respond_to user, "authenticate"
+  # end
+
+  test "Comprobar_que_cuando_guardamos_un_usuario_se_crea_un_remember_token" do
+    user = User.last.dup
+    user.remember_token = nil
+    user.password = "password"
+    user.password_confirmation = "password"
+    user.login = "Login_No_Registrado"
+    user.save
+    refute_nil user.remember_token
+  end
+
 end

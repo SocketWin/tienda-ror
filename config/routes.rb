@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   root 'inicio#index'
 
-  # get 'sign_up' => 'inicio#sign_up'
-
-  get 'sign_in' => 'inicio#sign_in'
-
+  match '/signin', to: 'sessions#new', via: 'get'
+  match '/signout', to: 'sessions#destroy', via: 'delete'
+  resources :sessions, only: [:new, :create, :destroy]
+  match '/signup', to: 'users#new', via: 'get'
   get 'my_car' => 'users#my_car'
 
   get 'buscar_producto' => "inicio#buscar_producto", as: "buscar_producto"
@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :lines
   resources :products
   resources :categories
-  resources :users
+  resources :users #, except: [:new]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
