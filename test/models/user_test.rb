@@ -67,4 +67,9 @@ class UserTest < ActiveSupport::TestCase
     refute_nil user.remember_token
   end
 
+  test "Comprobar existencia de los atributos" do
+    user = User.new
+    assert_respond_to user, "admin"
+  end
+
 end

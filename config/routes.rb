@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   match '/signin', to: 'sessions#new', via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'delete'
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :sessions, only: [:create]
   match '/signup', to: 'users#new', via: 'get'
   get 'my_car' => 'users#my_car'
 

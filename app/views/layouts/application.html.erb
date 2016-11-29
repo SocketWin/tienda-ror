@@ -20,8 +20,10 @@
       <%= yield %>
     </div>
     <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
-      <%= image_tag("imagen_predefinida.png", alt: "usuario") %>
-      <%= link_to "Mi carrito", my_car_path %>
+      <% if signed_in? %>
+          <%= image_tag("imagen_predefinida.png", alt: "usuario") %>
+          <%= link_to "Mi carrito", my_car_path %>
+      <% end %>
       <hr>
       <%= form_tag(buscar_producto_path, method: :get) do %>
           <div class="form-group">

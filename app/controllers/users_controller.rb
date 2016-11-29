@@ -1,22 +1,18 @@
 class UsersController < ApplicationController
   # before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :signed_in_user, only: [:index, :edit,:update]
+  before_action :signed_in_user, only: [:index, :edit,:update,
+                                        :actualizar_carrito, :my_car]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit,:update]
 
-  def correct_user
-    redirect_to root_url, notice: "Has sido redirigido por no tener los permisos adecuados" unless
-        current_user? @user
-  end
-
-  def login
-    @user = User.find_by_login(params[:login])
-    if @user.password == params[:password]
-      give_token
-    else
-      redirect_to home_url
-    end
-  end
+  # def login
+  #   @user = User.find_by_login(params[:login])
+  #   if @user.password == params[:password]
+  #     give_token
+  #   else
+  #     redirect_to home_url
+  #   end
+  # end
 
   # GET /users
   # GET /users.json
@@ -96,6 +92,11 @@ class UsersController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def correct_user
+    redirect_to root_url, notice: "Has sido redirigido por no tener los permisos adecuados" unless
+        current_user? @user
   end
 
 

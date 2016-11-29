@@ -14,7 +14,8 @@ namespace :db do
     edad: 24,
     cuenta_bancaria: "2365558899",
     password: "contraseña",
-    password_confirmation: "contraseña")
+    password_confirmation: "contraseña",
+    admin: true)
     99.times do |n|
       User.create!(name: Faker::Name.name+"-#{n}",
       login: Faker::Internet.user_name+"#{n}",

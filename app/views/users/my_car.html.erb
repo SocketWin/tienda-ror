@@ -1,6 +1,9 @@
 <% provide(:title, 'Mi Carrito') %>
 <h1>Mi Carrito</h1>
-<div class="row">
+<%= form_tag('/my_car', method: :post, class:"form-inline") do |f| %>
+    <%= button_tag("Confirmar la Compra", class:"btn btn-success btn-large") %>
+<% end %>
+<div class="row form-inline">
   <%= will_paginate @lines %>
 </div>
 <div class="row">

@@ -6,6 +6,12 @@ class UsersControllerTest < ActionController::TestCase
     @product = products(:product_1)
   end
 
+  test "not_should_in_my_car" do
+    get :my_car
+    assert_redirected_to signin_url
+
+  end
+
   test "should get index" do
     get :index
     assert_response :found
@@ -24,7 +30,7 @@ class UsersControllerTest < ActionController::TestCase
         end
         assert_select div, "label"
       end
-      assert_select "input[type='submit' class='btn btn-primary']", "Envíar"
+      assert_select "input[value=?]", "Envíar"
     end
   end
 
@@ -63,11 +69,13 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "Deberia actualizar carrito" do
+    sign_in User.first
     post :actualizar_carrito, product_id: @product.id, cantidad: 1
     assert_response :success
   end
 
   test "should get my_car" do
+    sign_in User.first
     get :my_car
     assert_response :success
     @lines = User.find_by_id(1).car.lines.paginate(page:1, per_page: 10)
@@ -94,6 +102,9 @@ class UsersControllerTest < ActionController::TestCase
       #   end
       # end
       assert_select "tr td", 50
+    end
+    assert_select "form[action=?]", '/my_car' do
+      assert_select "button", "Confirmar la Compra"
     end
   end
 

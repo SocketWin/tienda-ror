@@ -8,6 +8,7 @@ one:
   direccion: Algo inteligente
   edad: 24
   cuenta_bancaria: 4523452345
+  admin: 1
 
 two:
   id: 2
@@ -17,3 +18,4 @@ two:
   direccion: Algo inteligente
   edad: 24
   cuenta_bancaria: 4523452345
+  admin: 0

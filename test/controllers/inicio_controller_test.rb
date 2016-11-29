@@ -19,9 +19,17 @@ class InicioControllerTest < ActionController::TestCase
       assert_select "a[href=?]", category_path(category)
     end
     assert_select "div.pagination", 2
+    assert_select "input[placeholder='buscar producto']"
+    assert_select "a[href='/my_car']", false
+    assert_select "img[alt='usuario']", false
+  end
+
+  test "should_mostrar_carrito" do
+    sign_in User.first
+    get :index
+    assert_response :success
     assert_select "a[href='/my_car']", "Mi carrito"
     assert_select "img[alt='usuario']"
-    assert_select "input[placeholder='buscar producto']"
   end
 
   test "should post buscar_producto" do

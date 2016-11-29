@@ -31,7 +31,7 @@ class SessionsControllerTest < ActionController::TestCase
     post :create, session: { login: 'JonhyL', password: "contraseña"}
     delete :destroy
     assert_redirected_to root_path
-    assert_nil cookies[:remember_token]
+    assert_nil session[:remember_token]
     refute signed_in?
   end
 

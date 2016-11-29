@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161108005836) do
+ActiveRecord::Schema.define(version: 20161120232804) do
 
   create_table "cars", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -64,13 +64,14 @@ ActiveRecord::Schema.define(version: 20161108005836) do
   create_table "users", force: :cascade do |t|
     t.string   "name",            limit: 255
     t.string   "login",           limit: 255
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.string   "password_digest", limit: 255
     t.string   "direccion",       limit: 255
     t.integer  "edad",            limit: 4
     t.string   "cuenta_bancaria", limit: 255
     t.string   "remember_token",  limit: 255
+    t.boolean  "admin",                       default: false, null: false
   end
 
   add_index "users", ["login"], name: "index_users_on_login", unique: true, using: :btree
