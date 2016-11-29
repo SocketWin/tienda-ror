@@ -134,4 +134,21 @@ class UsersControllerTest < ActionController::TestCase
     assert_redirected_to signin_path
   end
 
+  test "funcion_agregar_al_carrito" do
+    sign_in User.second
+    assert_difference 'Line.count' do
+      post :actualizar_carrito, product_id:45, cantidad:5
+    end
+    assert_response :success
+  end
+
+  test "funcion_actualizar_carrito" do
+    sign_in User.second
+    post :actualizar_carrito, product_id:@product.id, cantidad:1
+    assert_response :unprocessable_entity
+    sign_in User.first
+
+    assert_response :success
+  end
+
 end

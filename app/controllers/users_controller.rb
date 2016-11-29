@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   # before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :signed_in_user, only: [:index, :edit,:update,
-                                        :actualizar_carrito, :my_car]
+                                        :actualizar_carrito, :my_car, :agregar_al_carrito]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit,:update]
 
@@ -64,10 +64,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def agregar_al_carrito
+    @product = Product.find_by_id params[:product_id]
+    @cantidad = params[:cantidad]
+    render :js => "alert('Ha agregado #{@cantidad} #{@product.titulo} al carrito de compras.')"
+  end
+
   def actualizar_carrito
     @product = Product.find_by_id params[:product_id]
     @cantidad = params[:cantidad]
-    render :js => "alert('Ha agregado al carrito de compras.')"
+    render :js => "alert('Ha agregado #{@cantidad} #{@product.titulo} al carrito de compras.')"
   end
 
   def my_car

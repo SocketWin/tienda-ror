@@ -31,7 +31,7 @@ class ProductsControllerTest < ActionController::TestCase
     assert_select "p", @product.descripcion
     assert_select "h2", @product.titulo
     assert_select "p strong", "$"+@product.precio.to_s
-    assert_select "form[action='/actualizar_carrito']"
+    assert_select "form[action='/agregar_al_carrito']"
     assert_select "input[name='cantidad']"
     assert_select "input[name='product_id']"
   end

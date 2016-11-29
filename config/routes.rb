@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'my_car' => 'users#my_car'
 
   get 'buscar_producto' => "inicio#buscar_producto", as: "buscar_producto"
+  post "agregar_al_carrito" => "users#agregar_al_carrito"
   post "actualizar_carrito" => "users#actualizar_carrito"
   post 'quitar_linea' => "users#quitar_linea", as: "quitar_linea"
 
