@@ -42,4 +42,9 @@ module SessionsHelper
     redirect_to signin_url, notice: "Identificate forastero!" unless signed_in?
   end
 
+  def user_is_admin
+    store_location
+    redirect_to signin_url, notice: "Debes ser administrador!" unless current_user.admin
+  end
+
 end

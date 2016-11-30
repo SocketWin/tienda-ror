@@ -71,9 +71,19 @@ class UsersController < ApplicationController
   end
 
   def actualizar_carrito
-    @product = Product.find_by_id params[:product_id]
-    @cantidad = params[:cantidad]
-    render :js => "alert('Ha agregado #{@cantidad} #{@product.titulo} al carrito de compras.')"
+    @line = Line.find_by_id params[:line_id]
+    @cantidad = params[:cantidad].to_i
+    if @line.car.user_id == current_user.id
+      if @cantidad > 0
+        @line.update_attribute(:cantidad, @cantidad)
+        redirect_to :back, notice: "Se ha procedido a actualizar la cantidad."
+      else
+        @line.delete
+        redirect_to :back, notice: "Se ha procedido a borrar la linea."
+      end
+    else
+      render file: "#{Rails.root}/public/500", layout: false, status: :error
+    end
   end
 
   def my_car

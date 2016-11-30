@@ -4,6 +4,7 @@ class UsersControllerTest < ActionController::TestCase
   setup do
     @user = users(:one)
     @product = products(:product_1)
+    @line = lines(:one)
   end
 
   test "not_should_in_my_car" do
@@ -68,43 +69,34 @@ class UsersControllerTest < ActionController::TestCase
     assert_redirected_to users_path
   end
 
-  test "Deberia actualizar carrito" do
-    sign_in User.first
-    post :actualizar_carrito, product_id: @product.id, cantidad: 1
-    assert_response :success
-  end
-
   test "should get my_car" do
     sign_in User.first
     get :my_car
     assert_response :success
     @lines = User.find_by_id(1).car.lines.paginate(page:1, per_page: 10)
     assert_select "h1", "Mi Carrito"
-    assert_select "table[class='table table-striped']" do |table|
+    assert_select "form[action=?]", '/my_car' do
+      assert_select "button", "Confirmar la Compra"
+    end
+    assert_select "table" do |table|
       assert_select table, "thead tr th", "Imagen Producto"
       assert_select table, "thead tr th", "Descripción Producto"
       assert_select table, "thead tr th", "Cantidad"
       assert_select table, "thead tr th", "Precio"
       assert_select table, "thead tr th", "Acciones"
-      assert_select table, "tbody"# do |tbody|
-      # end
-      # @lines.paginate(page:1, per_page: 10).each do |line|
-      #   assert_select "tr td img[alt=? height='72' width='72']", line.product.descripcion
-      #   assert_select "tr td", line.product.descripcion
-      #   assert_select "tr td", line.cantidad
-      #   assert_select "tr td", line.product.precio
-      #   assert_select "tr td form[action=? method='post']",
-      #                 quitar_linea_path(line.id) do |form|
-      #     assert_select form,
-      #                   "input[type='submit' class='btn btn-danger btn-sm']" do |submit|
-      #       assert_select submit, "span[class='glyphicon glyphicon-trash']"
-      #     end
-      #   end
-      # end
+      assert_select table, "tbody" do
+        @lines.each do |line|
+          assert_select "tr td form[action=?]", actualizar_carrito_url do
+            assert_select "input[value=?]", line.id.to_s
+            assert_select "input[value=?]", line.cantidad.to_s
+            assert_select "button", "Actualizar"
+          end
+          assert_select "tr td img[alt=?]", line.product.descripcion
+          assert_select "tr td", line.product.descripcion
+          assert_select "tr td", line.product.precio.to_s
+        end
+      end
       assert_select "tr td", 50
-    end
-    assert_select "form[action=?]", '/my_car' do
-      assert_select "button", "Confirmar la Compra"
     end
   end
 
@@ -134,6 +126,7 @@ class UsersControllerTest < ActionController::TestCase
     assert_redirected_to signin_path
   end
 
+=begin
   test "funcion_agregar_al_carrito" do
     sign_in User.second
     assert_difference 'Line.count' do
@@ -142,13 +135,37 @@ class UsersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "funcion_actualizar_carrito" do
-    sign_in User.second
-    post :actualizar_carrito, product_id:@product.id, cantidad:1
-    assert_response :unprocessable_entity
-    sign_in User.first
+=end
 
-    assert_response :success
+  test "funcion_actualizar_carrito_falla" do
+    sign_in User.second
+    request.env["HTTP_REFERER"]=my_car_url
+    post :actualizar_carrito, line_id:@line.id, cantidad:1
+    assert_response :error
   end
+
+  test "funcion_actualizar_carrito_funciona" do
+    sign_in User.first
+    request.env["HTTP_REFERER"]=my_car_url
+    post :actualizar_carrito, line_id:@line.id, cantidad:1
+    assert_response :redirect
+    assert Line.find_by(id: @line.id).cantidad == 1
+  end
+
+  test "funcion_actualizar_carrito_cero" do
+    sign_in User.first
+    request.env["HTTP_REFERER"]=my_car_url
+    id = @line.id
+    post :actualizar_carrito, line_id:@line.id, cantidad:0
+    assert_response :redirect
+    assert Line.find_by(id: id).nil?
+    @line = Line.find_by(id: 2)
+    id = @line.id
+    post :actualizar_carrito, line_id:@line.id, cantidad:-1
+    assert_response :redirect
+    assert Line.find_by(id: id).nil?
+  end
+
+
 
 end

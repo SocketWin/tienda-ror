@@ -5,7 +5,7 @@
   $<span><%= product.precio %></span>
   <div class="row">
     <div class="col-lg-8">
-      <%= form_tag("/agregar_al_carrito", remote: true) do %>
+      <%= form_tag(agregar_al_carrito_url, remote: true) do %>
           <div class="input-group">
             <%= text_field_tag "cantidad", 1, class:"form-control", placeholder:"Cantidad", required: true %>
             <%= text_field_tag "product_id", product.id, type: "hidden" %>

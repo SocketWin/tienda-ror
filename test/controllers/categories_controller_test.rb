@@ -36,7 +36,7 @@ class CategoriesControllerTest < ActionController::TestCase
       assert_select "span", product.precio.to_s
       assert_select "input[name='product_id']"
       assert_select "input[name='cantidad']"
-      assert_select "form[action='/agregar_al_carrito']" do |f|
+      assert_select "form[action=?]", agregar_al_carrito_url do |f|
         assert_select f, "button"
       end
     end
