@@ -1,10 +1,12 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
+  before_action :signed_in_user
+  before_action :user_is_admin
 
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.all
+    @categories = Category.paginate(page:params[:page], per_page:25)
   end
 
   # GET /categories/1
