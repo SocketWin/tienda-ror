@@ -1,9 +1,7 @@
 <% provide(:title, 'Producto '+@product.id.to_s) %>
 <div class="row">
-  <p id="notice"><%= notice %></p>
   <h2 class="page-header">
     <%= @product.titulo %>
-
   </h2>
   <%= form_tag(agregar_al_carrito_url, remote: true, class: "form-inline") do %>
       <div class="input-group">
@@ -22,3 +20,5 @@
 <div class="row">
   <%= image_tag(image_url(@product.imagen), alt: "producto") %>
 </div>
+<%= link_to "Editar", edit_product_url(@product) %> |
+<%= link_to "Atrás", products_url %>

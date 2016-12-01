@@ -3,6 +3,7 @@ require 'test_helper'
 class ProductsControllerTest < ActionController::TestCase
   setup do
     @product = products(:product_1)
+    @products=Product.all
   end
 
   test "no should get index" do
@@ -22,9 +23,29 @@ class ProductsControllerTest < ActionController::TestCase
     sign_in User.first
     get :index
     assert_response :success
-    assert_not_nil assigns(:products)
+    # assert_not_nil assigns(:products)
+    assert_select "table" do
+      assert_select "thead" do
+        assert_select "tr" do
+          assert_select "th", "Título"
+          assert_select "th", "Descripción"
+          assert_select "th", "Imagen"
+          assert_select "th", "Precio"
+        end
+      end
+      assert_select "tbody" do
+        @products.paginate(page:1, per_page: 25).each do |product|
+          assert_select "tr" do
+            assert_select "td", product.titulo
+            assert_select "td", product.descripcion
+            assert_select "td", product.imagen
+            assert_select "td", product.precio.to_s
+          end
+        end
+      end
+    end
+    assert_select "div.pagination", 2
   end
-
 
   test "should get new" do
     sign_in User.first

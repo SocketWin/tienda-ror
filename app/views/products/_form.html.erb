@@ -1,7 +1,7 @@
 <%= form_for(@product) do |f| %>
   <% if @product.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+      <h2><%= pluralize(@product.errors.count, "error") %> prohibieron que este producto se comience ha guardar:</h2>
 
       <ul>
       <% @product.errors.full_messages.each do |message| %>
@@ -11,27 +11,28 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :titulo %><br>
-    <%= f.text_field :titulo %>
+  <div class="form-group">
+    <%= f.label :titulo %>
+    <%= f.text_field :titulo, class:"form-control" %>
   </div>
-  <div class="field">
-    <%= f.label :descripcion %><br>
-    <%= f.text_area :descripcion %>
+  <div class="form-group">
+    <%= f.label :descripcion %>
+    <%= f.text_area :descripcion, class:"form-control" %>
   </div>
-  <div class="field">
-    <%= f.label :imagen %><br>
-    <%= f.text_field :imagen %>
+  <div class="form-group">
+    <%= f.label :imagen %>
+    <%= f.text_field :imagen, class:"form-control" %>
   </div>
-  <div class="field">
-    <%= f.label :precio %><br>
-    <%= f.text_field :precio %>
+  <div class="form-group">
+    <%= f.label :precio %>
+    <%= f.text_field :precio, class:"form-control" %>
   </div>
-    <div class="field">
-      <%= f.label :categories %> <br>
-      <%= f.select :category_ids, Category.all.collect {|c| [c.titulo, c.id] }, {}, {multiple: true} %>
+    <div class="form-group">
+      <%= f.label :categories %>
+      <%= f.select :category_ids, Category.all.collect {|c| [c.titulo, c.id] }, {},
+                   {multiple: true, class:"form-control"} %>
     </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <%= f.submit "Actualizar Producto", class:"btn btn-success" %>
   </div>
 <% end %>
