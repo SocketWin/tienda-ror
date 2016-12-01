@@ -1,0 +1,23 @@
+Buen día, <%= @user.name %>
+=====================================
+
+Has comprado satisfactoriamente en La Tienda Virtual como: <%= @user.login %>.
+
+.................................
+
+A continuación la lista de los productos que adquirió:
+
+Descripción
+Cantidad
+Precio Unitario
+Precio Total
+
+<% for line in @user.car.lines %>
+    <%= line.product.descripcion %>
+    <%= line.cantidad %>
+    <%= line.product.precio %>
+    <%= (line.cantidad*line.product.precio).round(2) %>
+<% end %>
+Total: <%= @user.car.suma_total %>
+
+Gracias por su compra que tenga un gran día!

@@ -7,7 +7,7 @@ class Car < ActiveRecord::Base
     for line in lines
       total += (line.product.precio * line.cantidad)
     end
-    total
+    total.round(2)
   end
 
 end

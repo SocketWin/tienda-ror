@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+<h1>Buen día, <%= @user.name %></h1>
+<p>
+  Has comprado satisfactoriamente en La Tienda Virtual como: <%= @user.login %>.<br>
+</p>
+<p>
+  A continuación la lista de los productos que adquirió:
+</p>
+<div class="row">
+  <table>
+    <thead>
+    <tr>
+      <!--<th>Imagen</th>-->
+      <th>Descripción</th>
+      <th>Cant.</th>
+      <th>Precio</th>
+      <th>Total</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% for line in @user.car.lines %>
+        <tr>
+          <!--<td><%# image_tag(line.product.imagen, alt: line.product.descripcion, size: "72") %></td>-->
+          <td><%= line.product.descripcion %></td>
+          <td><%= line.cantidad %></td>
+          <td><%= line.product.precio %></td>
+          <td><%= (line.cantidad*line.product.precio).round(2) %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+<h2>Total: <strong><%= @user.car.suma_total %></strong></h2>
+<p>Gracias por su compra que tenga un gran día!</p>
+</body>
+</html>

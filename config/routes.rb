@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :sessions, only: [:create]
   match '/signup', to: 'users#new', via: 'get'
   get 'my_car' => 'users#my_car'
+  post 'my_car' => 'users#comprar', as: "comprar"
 
   get 'buscar_producto' => "inicio#buscar_producto", as: "buscar_producto"
   post "agregar_al_carrito" => "users#agregar_al_carrito"

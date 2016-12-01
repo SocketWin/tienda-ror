@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161120232804) do
+ActiveRecord::Schema.define(version: 20161201140247) do
 
   create_table "cars", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -72,8 +72,10 @@ ActiveRecord::Schema.define(version: 20161120232804) do
     t.string   "cuenta_bancaria", limit: 255
     t.string   "remember_token",  limit: 255
     t.boolean  "admin",                       default: false, null: false
+    t.string   "email",           limit: 255,                 null: false
   end
 
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["login"], name: "index_users_on_login", unique: true, using: :btree
   add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
 

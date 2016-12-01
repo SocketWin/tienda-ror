@@ -37,8 +37,9 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should create user" do
     assert_difference('User.count') do
-      post :create, user: { login: "nicky", name: "Naulo", direccion: "por ahi", cuenta_bancaria: "2214342234",
-                            edad: 15, password: "algo1992", password_confirmation: "algo1992" }
+      post :create, user: {email:"a@a.aaa", login: "nicky", name: "Naulo", direccion: "por ahi",
+                           cuenta_bancaria: "2214342234", edad: 15, password: "algo1992",
+                           password_confirmation: "algo1992"}
     end
     assert_redirected_to root_path
   end
@@ -126,17 +127,6 @@ class UsersControllerTest < ActionController::TestCase
     assert_redirected_to signin_path
   end
 
-=begin
-  test "funcion_agregar_al_carrito" do
-    sign_in User.second
-    assert_difference 'Line.count' do
-      post :actualizar_carrito, product_id:45, cantidad:5
-    end
-    assert_response :success
-  end
-
-=end
-
   test "funcion_actualizar_carrito_falla" do
     sign_in User.second
     request.env["HTTP_REFERER"]=my_car_url
@@ -166,6 +156,43 @@ class UsersControllerTest < ActionController::TestCase
     assert Line.find_by(id: id).nil?
   end
 
+  test "funcion_agregar_al_carrito_falla por item" do
+    sign_in User.first
+    request.env["HTTP_REFERER"]=root_url
+    post :agregar_al_carrito, product_id:55, cantidad:1
+    assert_response :unprocessable_entity
+  end
 
+  test "funcion_agregar_al_carrito_falla por cantidad" do
+    sign_in User.first
+    request.env["HTTP_REFERER"]=root_url
+    post :agregar_al_carrito, product_id:5, cantidad:-1
+    assert_response :unprocessable_entity
+    post :agregar_al_carrito, product_id:5, cantidad:"ho"
+    assert_response :unprocessable_entity
+
+  end
+
+  test "funcion_agregar_al_carrito_funciona por login" do
+    request.env["HTTP_REFERER"]=root_url
+    post :agregar_al_carrito, product_id:2, cantidad:1
+    assert_response :redirect
+
+  end
+
+  test "funcion_agregar_al_carrito_funciona" do
+    sign_in User.first
+    assert_difference 'Line.count' do
+      post :agregar_al_carrito, product_id:45, cantidad:5
+    end
+    assert_response :success
+  end
+
+  test "compra" do
+    user = User.first
+    sign_in user
+    post :comprar
+    assert User.first.car.lines.length == 0
+  end
 
 end

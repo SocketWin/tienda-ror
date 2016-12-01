@@ -66,8 +66,17 @@ class UsersController < ApplicationController
 
   def agregar_al_carrito
     @product = Product.find_by_id params[:product_id]
-    @cantidad = params[:cantidad]
-    render :js => "alert('Ha agregado #{@cantidad} #{@product.titulo} al carrito de compras.')"
+    @cantidad = params[:cantidad].to_i
+    if @product.nil?
+      render js: "alert('No existe el item especificado.')", status: :unprocessable_entity
+    else
+      if @cantidad > 0
+        current_user.car.lines.create(product_id: @product.id, cantidad: @cantidad)
+        render :js => "alert('Ha agregado #{@cantidad} #{@product.titulo} al carrito de compras.')"
+      else
+        render js: "alert('Debe especificar una cantidad correcta mayor a 0')", status: :unprocessable_entity
+      end
+    end
   end
 
   def actualizar_carrito
@@ -84,6 +93,13 @@ class UsersController < ApplicationController
     else
       render file: "#{Rails.root}/public/500", layout: false, status: :error
     end
+  end
+
+  def comprar
+    mail=UserMailer.send_compra(current_user)
+    mail.deliver_now
+    current_user.car.lines.delete_all
+    redirect_to action: :my_car
   end
 
   def my_car
@@ -103,7 +119,8 @@ class UsersController < ApplicationController
   private
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:name, :login, :edad, :direccion, :cuenta_bancaria, :password, :password_confirmation)
+    params.require(:user).permit(:name, :login, :edad, :direccion, :cuenta_bancaria, :password, :email,
+                                 :password_confirmation)
   end
   # Use callbacks to share common setup or constraints between actions.
   def set_user

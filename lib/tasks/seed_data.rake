@@ -9,21 +9,23 @@ namespace :db do
   end
   def make_users
     User.create!(name: "Usuario",
-    login: "login",
-    direccion: "Algun lugar de Cuenca",
-    edad: 24,
-    cuenta_bancaria: "2365558899",
-    password: "contraseña",
-    password_confirmation: "contraseña",
-    admin: true)
+                 login: "login",
+                 direccion: "Algun lugar de Cuenca",
+                 edad: 24,
+                 cuenta_bancaria: "2365558899",
+                 password: "contraseña",
+                 password_confirmation: "contraseña",
+                 email: "developerjs@austrosoft.com.ec",
+                 admin: true)
     99.times do |n|
       User.create!(name: Faker::Name.name+"-#{n}",
-      login: Faker::Internet.user_name+"#{n}",
-      direccion: Faker::Address.street_address(include_secondary = true),
-      edad: Faker::Number.number(2),
-      cuenta_bancaria: Faker::Finance.credit_card,
-      password: "contraseña",
-      password_confirmation: "contraseña")
+                   login: Faker::Internet.user_name+"#{n}",
+                   direccion: Faker::Address.street_address(include_secondary = true),
+                   edad: Faker::Number.number(2),
+                   cuenta_bancaria: Faker::Finance.credit_card,
+                   password: "contraseña",
+                   email: Faker::Internet.email+"#{n}",
+                   password_confirmation: "contraseña")
     end
   end
   def make_categories

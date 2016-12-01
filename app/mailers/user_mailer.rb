@@ -1,8 +1,8 @@
 class UserMailer < ApplicationMailer
-  # default from: 'notifications@example.com'
+  default from: 'ing.ronaldespinoza@gmail.com'
 
-  def email(user)
+  def send_compra(user)
     @user = user
-    mail(to: @user.email, subject: 'Título de correo')
+    mail(to: @user.email, subject: user.name+', has comprado en La Tienda Virtual', template_name: "compra")
   end
 end

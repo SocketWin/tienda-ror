@@ -7,6 +7,7 @@ one:
   password_digest: $2a$10$4LEA7r4YmNHtvlAvHhsYAeZmk/xeUVtMTYqwIvYY76EW5GUqDiP4.
   direccion: Algo inteligente
   edad: 24
+  email: developerjs@austrosoft.com.ec
   cuenta_bancaria: 4523452345
   admin: 1
 
@@ -17,5 +18,6 @@ two:
   password_digest: $2a$10$4LEA7r4YmNHtvlAvHhsYAeZmk/xeUVtMTYqwIvYY76EW5GUqDiP4.
   direccion: Algo inteligente
   edad: 24
+  email: developer@austrosoft.com.ec
   cuenta_bancaria: 4523452345
   admin: 0

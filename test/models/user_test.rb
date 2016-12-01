@@ -62,6 +62,7 @@ class UserTest < ActiveSupport::TestCase
     user.remember_token = nil
     user.password = "password"
     user.password_confirmation = "password"
+    user.email="kari@gmail.com"
     user.login = "Login_No_Registrado"
     user.save
     refute_nil user.remember_token
